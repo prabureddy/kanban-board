@@ -131,58 +131,56 @@ export default function Navbar(props) {
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <div>
-              <ModalHeader>{isSignIn ? `Sign In` : "Sign Up"}</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>
-                <Box
-                  py={{ base: "0", sm: "8" }}
-                  px={{ base: "4", sm: "10" }}
-                  bg={{ base: "transparent", sm: "bg.surface" }}
-                  borderRadius={{ base: "none", sm: "xl" }}
-                >
-                  <Stack spacing="6">
-                    <Stack spacing="5">
-                      {!isSignIn && (
-                        <FormControl>
-                          <FormLabel htmlFor="email">Full Name</FormLabel>
-                          <Input
-                            id="name"
-                            type="text"
-                            onChange={(e) => {
-                              setName(e.target.value);
-                            }}
-                          />
-                        </FormControl>
-                      )}
+            <ModalHeader>{isSignIn ? `Sign In` : "Sign Up"}</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Box
+                py={{ base: "0", sm: "8" }}
+                px={{ base: "4", sm: "10" }}
+                bg={{ base: "transparent", sm: "bg.surface" }}
+                borderRadius={{ base: "none", sm: "xl" }}
+              >
+                <Stack spacing="6">
+                  <Stack spacing="5">
+                    {!isSignIn && (
                       <FormControl>
-                        <FormLabel htmlFor="email">Email</FormLabel>
+                        <FormLabel htmlFor="email">Full Name</FormLabel>
                         <Input
-                          id="email"
-                          type="email"
+                          id="name"
+                          type="text"
                           onChange={(e) => {
-                            setEmail(e.target.value);
+                            setName(e.target.value);
                           }}
                         />
                       </FormControl>
+                    )}
+                    <FormControl>
+                      <FormLabel htmlFor="email">Email</FormLabel>
+                      <Input
+                        id="email"
+                        type="email"
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
+                      />
+                    </FormControl>
 
-                      <PasswordField ref={passwordRef} />
-                    </Stack>
+                    <PasswordField ref={passwordRef} />
                   </Stack>
-                </Box>
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  colorScheme="blue"
-                  mr={3}
-                  onClick={() => {
-                    (isSignIn ? handlerSignIn : handlerCreateAccount)();
-                  }}
-                >
-                  {isSignIn ? `Sign In` : "Sign Up"}
-                </Button>
-              </ModalFooter>
-            </div>
+                </Stack>
+              </Box>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                colorScheme="blue"
+                mr={3}
+                onClick={() => {
+                  (isSignIn ? handlerSignIn : handlerCreateAccount)();
+                }}
+              >
+                {isSignIn ? `Sign In` : "Sign Up"}
+              </Button>
+            </ModalFooter>
           </ModalContent>
         </Modal>
       </div>
