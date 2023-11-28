@@ -2084,7 +2084,7 @@ a > .local__bootstrap code {
   background-size: contain;
   border: 1px solid rgba(0, 0, 0, 0.25);
   appearance: none;
-  color-adjust: exact;
+  print-color-adjust: exact;
 }
 .local__bootstrap .form-check-input[type="checkbox"] {
   border-radius: 0.25em;
