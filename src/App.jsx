@@ -14,15 +14,6 @@ function App() {
   const [data, setLocalData] = useState([]);
   const [user] = useLocalStorage("user", "");
 
-  useEffect(() => {
-    const unregisterAuthObserver = auth.onAuthStateChanged((user) => {
-      if (!user) {
-        setLocalData([]);
-      }
-    });
-    return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-  }, [data]);
-
   const setData = async (data) => {
     data = data || [];
     var currentUser = auth.currentUser;
@@ -142,7 +133,7 @@ function App() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App" data-theme={theme}>
-        <Navbar switchTheme={switchTheme} />
+        <Navbar switchTheme={switchTheme} setLocalData={setLocalData} />
         <div className="app_outer">
           {user ? (
             <div className="app_boards">

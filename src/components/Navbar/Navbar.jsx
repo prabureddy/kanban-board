@@ -89,6 +89,7 @@ export default function Navbar(props) {
             onClick={() => {
               signOut(auth).then(() => {
                 setUser("");
+                props?.setLocalData([]);
               });
             }}
           >

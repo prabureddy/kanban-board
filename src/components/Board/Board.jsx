@@ -8,7 +8,7 @@ import { Droppable } from "react-beautiful-dnd";
 export default function Board(props) {
   const [show, setShow] = useState(false);
   const [dropdown, setDropdown] = useState(false);
-  console.log(props);
+
   useEffect(() => {
     document.addEventListener("keypress", (e) => {
       if (e.code === "Enter") setShow(false);
