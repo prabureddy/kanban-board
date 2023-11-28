@@ -29,7 +29,7 @@ import useLocalStorage from "use-local-storage";
 export default function Navbar(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isSignIn, setIsSignIn] = useState(true);
-  const [user, setUser] = useLocalStorage("user", "");
+  const [user, setUser] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const passwordRef = useRef();
@@ -37,12 +37,14 @@ export default function Navbar(props) {
   useEffect(() => {
     const unregisterAuthObserver = auth.onAuthStateChanged((user) => {
       setUser(user);
+      props?.setUser(user);
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-  }, [setUser]);
+  }, [props, setUser, user]);
 
   const handlerSignIn = async () => {
     const password = passwordRef.current.value;
+    console.log(auth);
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         onClose();

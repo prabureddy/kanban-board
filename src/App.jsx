@@ -12,7 +12,7 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 
 function App() {
   const [data, setLocalData] = useState([]);
-  const [user] = useLocalStorage("user", "");
+  const [user, setUser] = useState("");
 
   const setData = async (data) => {
     data = data || [];
@@ -123,7 +123,7 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      var currentUser = auth.currentUser;
+      var currentUser = auth?.currentUser;
       if (!currentUser?.uid) return;
       const q = await getDoc(doc(firestore, "users", currentUser?.uid));
       setLocalData(q.data()?.tasks ?? []);
@@ -133,7 +133,11 @@ function App() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App" data-theme={theme}>
-        <Navbar switchTheme={switchTheme} setLocalData={setLocalData} />
+        <Navbar
+          switchTheme={switchTheme}
+          setLocalData={setLocalData}
+          setUser={setUser}
+        />
         <div className="app_outer">
           {user ? (
             <div className="app_boards">
