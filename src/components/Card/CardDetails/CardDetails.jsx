@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  CheckSquare,
-  Clock,
-  CreditCard,
-  Tag,
-  Trash,
-  X,
-} from "react-feather";
+import { CheckSquare, CreditCard, Tag, Trash, X } from "react-feather";
 import Editable from "../../Editable/Editable";
 import Modal from "../../Modal/Modal";
 import "./CardDetails.css";
@@ -20,6 +13,7 @@ export default function CardDetails(props) {
   const [input, setInput] = useState(false);
   const [text, setText] = useState(values.title);
   const [labelShow, setLabelShow] = useState(false);
+
   const Input = (props) => {
     return (
       <div className="">
@@ -104,9 +98,10 @@ export default function CardDetails(props) {
       document.removeEventListener("keypress", handelClickListner);
     };
   });
+
   useEffect(() => {
     if (props.updateCard) props.updateCard(props.bid, values.id, values);
-  }, [values]);
+  }, [props, values]);
 
   return (
     <Modal onClose={props.onClose}>
@@ -255,13 +250,6 @@ export default function CardDetails(props) {
                     onClose={setLabelShow}
                   />
                 )}
-                <button>
-                  <span className="icon__sm">
-                    <Clock />
-                  </span>
-                  Date
-                </button>
-
                 <button onClick={() => props.removeCard(props.bid, values.id)}>
                   <span className="icon__sm">
                     <Trash />

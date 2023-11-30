@@ -42,22 +42,19 @@ function App() {
   };
 
   const dragCardInBoard = (source, destination) => {
-    let tempData = [...data];
+    const tempData = [...data];
     const destinationBoardIdx = tempData.findIndex(
-      (item) => item.id.toString() === destination.droppableId
+        (item) => item.id.toString() === destination.droppableId
     );
     const sourceBoardIdx = tempData.findIndex(
-      (item) => item.id.toString() === source.droppableId
+        (item) => item.id.toString() === source.droppableId
     );
-    tempData[destinationBoardIdx].card.splice(
-      destination.index,
-      0,
-      tempData[sourceBoardIdx].card[source.index]
-    );
-    tempData[sourceBoardIdx].card.splice(source.index, 1);
+
+    const movedCard = tempData[sourceBoardIdx].card.splice(source.index, 1)[0];
+    tempData[destinationBoardIdx].card.splice(destination.index, 0, movedCard);
 
     return tempData;
-  };
+};
 
   const addCard = (title, bid) => {
     const index = data.findIndex((item) => item.id === bid);
@@ -100,8 +97,6 @@ function App() {
   const onDragEnd = (result) => {
     const { source, destination } = result;
     if (!destination) return;
-
-    if (source.droppableId === destination.droppableId) return;
 
     setData(dragCardInBoard(source, destination));
   };

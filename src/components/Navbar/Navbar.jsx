@@ -24,7 +24,6 @@ import {
 } from "firebase/auth";
 import { auth } from "./../../firebase.js";
 import { PasswordField } from "../PasswordField.jsx";
-import useLocalStorage from "use-local-storage";
 
 export default function Navbar(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -46,7 +45,7 @@ export default function Navbar(props) {
     const password = passwordRef.current.value;
     console.log(auth);
     await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(() => {
         onClose();
       })
       .catch((error) => {
@@ -59,7 +58,7 @@ export default function Navbar(props) {
   const handlerCreateAccount = async () => {
     const password = passwordRef.current.value;
     await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(() => {
         onClose();
         updateProfile(auth.currentUser, {
           displayName: name,
