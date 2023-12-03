@@ -27,5 +27,6 @@ const app = initializeApp(firebaseConfig);
 export default app;
 
 export const auth = getAuth(app);
+// INITIATE JWT SESSION on browser
 setPersistence(auth, browserSessionPersistence);
 export const firestore = getFirestore(app);
